@@ -15,8 +15,10 @@ This will help you to perform various functionalities using AWS S3
 npm install 
 ```
 3. Edit '.env' file and replace dummy credential with your credentials 
-
-
-
+4. Now start your server
+```sh
+npm start 
+```
+Bingo here you go !
 
 
