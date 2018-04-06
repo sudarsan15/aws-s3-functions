@@ -8,6 +8,14 @@ This will help you to perform various functionalities using AWS S3
 2. Create IAM User via IAM console with policy supporting S3
 3. Generate the 'AccessKey' and 'AccessSecretKey'
 
+## Installation
+1. Clone the repository
+2. Move to cloned directory and install all dependencies 
+```sh
+npm install 
+```
+3. Edit '.env' file and replace dummy credential with your credentials 
+
 
 
 
