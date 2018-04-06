@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>AWS S3 - Functionalities</title>
+    <style type="text/css">
+      .heading{
+        background-color: #20B2AA;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+     <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+        <a class="navbar-brand" href="/">AWS S3</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav mr-auto">
+
+            <li class="nav-item">
+              <a class="nav-link" href="/">Upload <span class="sr-only">(current)</span></a>
+            </li>
+
+            <li class="nav-item active">
+              <a class="nav-link" href="/static/">Static</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/fetch/">Fetch</a>
+            </li>
+
+          </ul>
+        </div>
+    </nav>
+     <div class="container-fluid">
+        <br/><br/><br/>
+        <div class="col-md-8 col-md-offset-2 col-xs-12 col-sm-12">
+          <br/><br/>
+
+          <div class="row">
+            <div class="col-md-12 col-xs-12 col-sm-12">
+              <h3><%= title %></h3>
+              <p>Uploading a file alreadying existing in the server </p> 
+            </div>
+          </div>
+
+          <br/><br/>
+           
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+              <tr >
+                <th class="heading">Image location</th>
+                <th class="heading">Image</th>
+                <th class="heading">Action</th>
+              </tr> 
+              <tr>
+                <td><%= imgUrl %></td>
+                <td><img src="<%= imgUrl %>/sample.jpg" width="40%" height="40%"></td>
+                <td>
+                  <form method="post" action="/static/?_csrf=<%= csrfToken %>">
+                    <input type="hidden" id="_csrf" value="<%= csrfToken %>">
+                    <input type="submit" name="Upload" class="btn btn-info" value="Upload">
+                  </form>
+                </td>  
+              </tr>
+            </table>
+          </div>
+          <br/>
+          <div class="row">
+            <div class="col-md-6 col-xs-6 col-sm-6 ">
+              <% if (success !='') { %>
+                  <div class="alert alert-success">
+                      <%= success %>
+                  </div>
+                <% } %>
+                <% if (error !='') { %>
+                  <div class="alert alert-error">
+                      <%= error %>
+                  </div>
+              <% } %> 
+           </div> 
+          </div>    
+        </div>
+      </div>     
+  </body>
+</html>    

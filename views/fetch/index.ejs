@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <title>AWS S3 - Functionalities</title>
+  </head>
+  <body>
+     <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+        <a class="navbar-brand" href="/">AWS S3</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav mr-auto">
+
+            <li class="nav-item">
+              <a class="nav-link" href="/">Upload <span class="sr-only">(current)</span></a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/static/">Static</a>
+            </li>
+
+            <li class="nav-item active">
+              <a class="nav-link" href="/fetch/">Fetch</a>
+            </li>
+
+          </ul>
+        </div>
+    </nav>
+     <div class="container-fluid">
+        <br/><br/><br/>
+        <div class="col-md-8 col-md-offset-2 col-xs-12 col-sm-12">
+          <div class="row">
+            <div class="col-md-12 col-xs-12 col-sm-12">
+              <h3><%= title %></h3>
+            </div>
+          </div>
+
+          <br/><br/>
+
+          <div class="row">
+            <div class="col-md-8 col-xs-12 col-sm-12 ">
+              <% if (success !='') { %>
+                  <div class="alert alert-success">
+                      <%= success %>
+                  </div>
+                <% } %>
+                <% if (error !='') { %>
+                  <div class="alert alert-error">
+                      <%= error %>
+                  </div>
+              <% } %> 
+           </div> 
+          </div>    
+
+          <br/><br/>
+
+          <% if(data != null){   %>
+
+              <div class="row">
+                <div class="col-md-3 col-xs-12 col-sm-12">
+                  <b> Slno# </b>
+                </div> 
+                <div class="col-md-3 col-xs-12 col-sm-12">
+                  <b> Image </b>
+                </div> 
+                <div class="col-md-3 col-xs-12 col-sm-12">
+                  <b> Details </b>
+                </div> 
+                <div class="col-md-3 col-xs-12 col-sm-12">
+                  <b> Action </b>
+                </div> 
+              </div>  
+              <hr/>
+            <%  for(var i =0 ; i < data.length ; i ++){ %>
+                <div class="row">
+                  <div class="col-md-3 col-xs-12 col-sm-12">
+                    <%=  i+1 %>
+                  </div>  
+                  <div class="col-md-3 col-xs-12 col-sm-12">
+                    <div class="thumbnail">
+                        <img src="<%= url %><%= data[i].Key  %>" class="img-thumbnail"   width="50%" height="50%">
+                    </div>
+                  </div>
+
+                    <div class="col-md-3 col-xs-12 col-sm-12">
+                      <p>Size:  <%= data[i].Size  %> Bytes</p>
+                    </div>  
+                
+                   <div class="col-md-3 col-xs-12 col-sm-12">
+                      <button  data-key="<%= data[i].Key  %>" data-csrf="<%= csrfToken %>"  class="btn btn-danger btn-sm" onclick="deleteFun(this);" >Delete</button>
+                      <a href="<%= url %><%= data[i].Key  %>" class="btn btn-sm btn-success" target="_blank" >View</a>
+                  </div>
+                </div>   
+            <% } %>
+          <% }%>  
+        </div>
+      </div> 
+      <script type="text/javascript">
+        function deleteFun(current){
+          var r = confirm("You won\'t be able to undo the operation");
+          if(r == true){
+            var _csrf = $(current).attr("data-csrf");
+            var key = $(current).attr("data-key");
+           
+            $('<form action="../s3delete" method="POST"/>')
+            .append($('<input type="hidden" name="key" value="' + key + '">'))
+            .append($('<input type="hidden" name="_csrf" value="' + _csrf + '">'))
+            .appendTo($(document.body))
+            .submit();      
+          }
+        }
+      </script>    
+  </body>
+</html>    
