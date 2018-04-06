@@ -37,7 +37,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/',function(req,res,next){
 
-	fs.readFile('./public/images/sample.jpeg', function (err, data) {
+	fs.readFile('./public/images/sample.jpg', function (err, data) {
 	  if (err) { throw err; }
 
 	  var params = {
