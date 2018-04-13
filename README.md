@@ -6,6 +6,7 @@ This will help you to perform various functionalities using AWS S3
 ## Prerequisite
 1. AWS Account 
 2. Create IAM User via IAM console with policy supporting S3
+3. Create a S3 Bucket with public access
 3. Generate the 'AccessKey' and 'AccessSecretKey'
 
 ## Installation
