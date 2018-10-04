@@ -78,7 +78,7 @@ function s3delete(req,res){
 
 	if(objectKey != null){
 		var params = {
-		    Bucket: 'suddevtestbucket2',
+		    Bucket: process.env.S3_BUCKET,
 		    Key : objectKey
 		};
 
